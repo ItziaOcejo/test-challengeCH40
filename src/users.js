@@ -1,6 +1,6 @@
 // Imports small array of users
 // Pretend it's an API request
-const users = require("./data").default;
+const users = require("../src/data").default;
 
 // Fetches all users
 const getUsers = () => {
@@ -17,3 +17,19 @@ const getUser = (id) => {
 
 module.exports = { getUsers, getUser };
 
+// Simulates fetching user data using a promise
+const getUserData = (id) => {
+  return new Promise((resolve, reject) => {
+    const user = getUser(id);
+    if (user) {
+      // Simulate API delay with setTimeout
+      setTimeout(() => {
+        resolve(user);
+      }, 1000); // Resolve after 1 second (simulated delay)
+    } else {
+      reject(new Error("User not found")); // Reject if user not found
+    }
+  });
+};
+
+module.exports = { getUsers, getUser, getUserData };
